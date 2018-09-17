@@ -7,3 +7,7 @@ install:
 after_success:
   - firebase deploy --token $FIREBASE_TOKEN
   - cd ../
+branches:
+  only:
+  - master
+  - dev
