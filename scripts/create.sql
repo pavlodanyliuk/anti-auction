@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS public.users (
   email VARCHAR(320) NOT NULL, --64 characters for the "local part" (username). 1 character for the @ symbol. 255 characters for the domain name.
   password VARCHAR(128) NOT NULL,
   birth DATE NULL,
+  reg_date DATE DEFAULT CURRENT_DATE,
   phone VARCHAR(16) NULL,
   sex BOOLEAN NULL,
   image VARCHAR(2083) NULL,
