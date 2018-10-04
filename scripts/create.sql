@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS public.users (
   phone VARCHAR(16) NULL,
   sex BOOLEAN NULL,
   image VARCHAR(2083) NULL,
-  notiffication_sett BOOLEAN NOT NULL DEFAULT TRUE,
+  notification_sett BOOLEAN NOT NULL DEFAULT TRUE,
 
   CONSTRAINT pk_users_id PRIMARY KEY (id),
   CONSTRAINT uk_users_login UNIQUE (login),
