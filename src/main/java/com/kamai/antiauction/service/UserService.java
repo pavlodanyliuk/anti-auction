@@ -12,14 +12,19 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final SecurityService securityService;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, SecurityService securityService) {
         this.userRepository = userRepository;
+        this.securityService = securityService;
     }
 
     public User saveUser(User user) {
-        return userRepository.save(user);
+
+        user.setNotificationSettIsOn(true);
+
+        return userRepository.save(securityService.encodePass(user));
     }
 
     public User getUser(Long userId ) {

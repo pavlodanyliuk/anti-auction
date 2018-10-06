@@ -25,7 +25,7 @@ public class JdbcUserRepository implements UserRepository {
 
     @Autowired
     public JdbcUserRepository(NamedParameterJdbcTemplate namedJdbcTemplate, Environment env) {
-        System.out.println("Class initialized");
+        log.info("Class initialized");
 
         this.namedJdbcTemplate = namedJdbcTemplate;
         this.env = env;
@@ -35,7 +35,7 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public User save(User user) {
 
-        System.out.println("Saving user: " + user);
+        log.info("Saving user: " + user);
 
         MapSqlParameterSource namedParams = new MapSqlParameterSource();
 
@@ -82,5 +82,10 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public void delete(User entity) {
 
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return null;
     }
 }

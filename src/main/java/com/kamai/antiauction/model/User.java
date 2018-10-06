@@ -1,4 +1,5 @@
 package com.kamai.antiauction.model;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.kamai.antiauction.model.transfer.validation.UserValidation;
 import com.kamai.antiauction.model.transfer.view.View;
@@ -41,6 +42,7 @@ public class User {
     @Max(value=128, message = "Too long value")
     private String password;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     @JsonView({View.FullView.class})
     @Past
     private LocalDate birth;
@@ -57,11 +59,13 @@ public class User {
     @Max(value=2083, message = "Too long value")
     private String image;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     @JsonView({View.FullView.class})
     private LocalDate regDate;
 
     @JsonView({View.FullView.class})
     @NotNull (groups = {UserValidation.UpdateUserNotifications.class}, message = "Notification settings cannot be null")
+    @NotNull (groups = {UserValidation.New.class}, message = "Notification settings must be null")
     private Boolean notificationSettIsOn;
 
 }

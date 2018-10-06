@@ -34,11 +34,18 @@ public class UserController {
 
         log.info("GET /");
 
-        User user = userService.getUser(id);
+        User user = new User();
+        user.setId(3L);
+        user.setName("name");
+        user.setLogin("login");
+        user.setEmail("email");
+        user.setPassword("passwd");
+        user.setSurname("surname");
+
 
         if (user == null) {
             log.info("User with id=" + id + " does not exist");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
@@ -46,11 +53,11 @@ public class UserController {
     @JsonView(View.FullView.class)
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<User> createUser(
-
+            @Validated(UserValidation.New.class)
             @RequestBody User user
     ) {
 
-        System.out.println("POST /");
+        log.info("POST /");
 
         User savedUser = userService.saveUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.OK);
